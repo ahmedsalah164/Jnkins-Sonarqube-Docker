@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="MediCare E-Health — Your trusted digital healthcare partner providing innovative telemedicine, e-health, and patient care management solutions." />
+  <title>MediCare E-Health | Your Trusted Digital Healthcare Partner</title>
+  <style>
+    /* ===========================
+       GLOBAL RESET & BASE
+    =========================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: #f0f4f8;
+      color: #1a1a2e;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ===========================
+       STICKY HEADER / NAVBAR
+    =========================== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: #1565C0;
+      box-shadow: 0 4px 20px rgba(21, 101, 192, 0.45);
+    }
+
+    .header-top {
+      text-align: center;
+      padding: 18px 20px 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .header-top h1 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+
+    .header-top h1 span {
+      color: #90CAF9;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px 20px 14px;
+      gap: 0;
+    }
+
+    nav a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      padding: 6px 20px;
+      position: relative;
+      transition: color 0.25s ease;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: #90CAF9;
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #90CAF9;
+    }
+
+    nav a:hover::after {
+      width: 60%;
+    }
+
+    .nav-sep {
+      color: rgba(255,255,255,0.45);
+      font-size: 1.1rem;
+      user-select: none;
+    }
+
+    /* ===========================
+       HERO SECTION
+    =========================== */
+    .hero {
+      min-height: 450px;
+      background: linear-gradient(120deg,
+        #1565C0 0%,
+        #2196F3 30%,
+        #c5d8f5 58%,
+        #dce9ff 72%,
+        #e8eaf6 85%,
+        #e0f0ff 100%
+      );
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 60px 8% 60px;
+      position: relative;
+      overflow: hidden;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    /* === Animated background pulse rings === */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      left: -80px;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(33,150,243,0.18) 0%, transparent 70%);
+      animation: pulse-ring 5s ease-in-out infinite;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      right: 10%;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(21,101,192,0.12) 0%, transparent 70%);
+      animation: pulse-ring 7s ease-in-out infinite reverse;
+    }
+
+    @keyframes pulse-ring {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      50%       { transform: scale(1.15); opacity: 1; }
+    }
+
+    /* ===========================
+       HERO LEFT — Medical Icons
+    =========================== */
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      z-index: 1;
+      flex-shrink: 0;
+    }
+
+    .hex-row {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+
+    /* Hexagon CSS shape */
+    .hex {
+      position: relative;
+      width: 80px;
+      height: 46px;
+      background: rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      color: #ffffff;
+      cursor: default;
+      border: 2px solid rgba(144, 202, 249, 0.6);
+      box-shadow:
+        0 0 14px rgba(33,150,243,0.6),
+        0 0 28px rgba(33,150,243,0.25),
+        inset 0 0 8px rgba(255,255,255,0.08);
+      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: hex-glow 3s ease-in-out infinite alternate;
+    }
+
+    .hex:hover {
+      transform: scale(1.12);
+      box-shadow:
+        0 0 22px rgba(33,150,243,0.9),
+        0 0 44px rgba(33,150,243,0.4),
+        inset 0 0 12px rgba(255,255,255,0.15);
+    }
+
+    .hex-lg {
+      width: 100px;
+      height: 58px;
+      font-size: 2rem;
+    }
+
+    @keyframes hex-glow {
+      from {
+        box-shadow:
+          0 0 10px rgba(33,150,243,0.5),
+          0 0 20px rgba(33,150,243,0.2),
+          inset 0 0 6px rgba(255,255,255,0.06);
+      }
+      to {
+        box-shadow:
+          0 0 20px rgba(33,150,243,0.85),
+          0 0 40px rgba(33,150,243,0.35),
+          inset 0 0 10px rgba(255,255,255,0.12);
+      }
+    }
+
+    .hex-label {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.75);
+      text-align: center;
+      letter-spacing: 0.4px;
+      margin-top: 3px;
+      font-weight: 500;
+    }
+
+    .hex-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ECG/Pulse decorative line */
+    .ecg-line {
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .ecg-svg {
+      width: 180px;
+      height: 38px;
+      overflow: visible;
+    }
+
+    .ecg-path {
+      stroke: #64B5F6;
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 0 4px rgba(100,181,246,0.8));
+      stroke-dasharray: 300;
+      stroke-dashoffset: 300;
+      animation: draw-ecg 2.5s ease forwards 0.5s;
+    }
+
+    @keyframes draw-ecg {
+      to { stroke-dashoffset: 0; }
+    }
+
+    /* ===========================
+       HERO CENTER — Text Content
+    =========================== */
+    .hero-center {
+      flex: 1;
+      min-width: 280px;
+      text-align: center;
+      z-index: 1;
+      padding: 0 20px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.22);
+      border: 1px solid rgba(255,255,255,0.45);
+      border-radius: 50px;
+      padding: 5px 18px;
+      font-size: 0.78rem;
+      color: #ffffff;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0D2B5E;
+      line-height: 1.3;
+      margin-bottom: 16px;
+      text-shadow: 0 1px 4px rgba(255,255,255,0.6);
+    }
+
+    .hero-title em {
+      font-style: normal;
+      color: #1565C0;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      color: #333333;
+      line-height: 1.7;
+      max-width: 420px;
+      margin: 0 auto 28px;
+    }
+
+    .hero-features {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .feature-chip {
+      background: rgba(21,101,192,0.12);
+      border: 1px solid rgba(21,101,192,0.3);
+      border-radius: 50px;
+      padding: 6px 16px;
+      font-size: 0.8rem;
+      color: #1565C0;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    /* ===========================
+       HERO RIGHT — Brand Text
+    =========================== */
+    .hero-right {
+      text-align: right;
+      z-index: 1;
+      flex-shrink: 0;
+    }
+
+    .brand-medicare {
+      display: block;
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.05;
+      text-shadow:
+        0 2px 12px rgba(21,101,192,0.5),
+        0 0 30px rgba(33,150,243,0.4);
+      letter-spacing: -1px;
+    }
+
+    .brand-ehealth {
+      display: block;
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: #ffffff;
+      line-height: 1.05;
+      margin-left: 1rem;      /* slight indent */
+      text-shadow:
+        0 2px 12px rgba(21,101,192,0.5),
+        0 0 30px rgba(33,150,243,0.4);
+      letter-spacing: 2px;
+    }
+
+    .brand-divider {
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(to left, rgba(255,255,255,0.7), transparent);
+      border-radius: 2px;
+      margin: 10px 0;
+    }
+
+    .brand-tagline {
+      font-size: 1.2rem;
+      font-style: italic;
+      color: rgba(255,255,255,0.88);
+      letter-spacing: 0.5px;
+      text-shadow: 0 1px 6px rgba(21,101,192,0.4);
+    }
+
+    /* ===========================
+       SERVICES STRIP
+    =========================== */
+    .services-strip {
+      background: #ffffff;
+      padding: 54px 8%;
+      border-bottom: 1px solid #e0e8f0;
+    }
+
+    .section-label {
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2196F3;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #0D2B5E;
+      margin-bottom: 40px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+    }
+
+    .service-card {
+      background: linear-gradient(145deg, #f8fbff, #eef4fd);
+      border: 1px solid #d0e4f8;
+      border-radius: 16px;
+      padding: 28px 20px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #1565C0, #2196F3);
+      border-radius: 16px 16px 0 0;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(21,101,192,0.18);
+      border-color: #90CAF9;
+    }
+
+    .card-icon {
+      font-size: 2.4rem;
+      margin-bottom: 14px;
+      display: block;
+      filter: drop-shadow(0 2px 4px rgba(33,150,243,0.3));
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1565C0;
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      font-size: 0.83rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    /* ===========================
+       ABOUT / STATS SECTION
+    =========================== */
+    .about-section {
+      background: linear-gradient(135deg, #1565C0 0%, #1E88E5 50%, #2196F3 100%);
+      padding: 60px 8%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .about-text {
+      flex: 1;
+      min-width: 280px;
+      color: #ffffff;
+    }
+
+    .about-text .section-label {
+      color: #90CAF9;
+      text-align: left;
+    }
+
+    .about-text h2 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+
+    .about-text p {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.8;
+      max-width: 480px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      flex-shrink: 0;
+    }
+
+    .stat-box {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 14px;
+      padding: 22px 28px;
+      text-align: center;
+      backdrop-filter: blur(6px);
+      transition: background 0.3s ease;
+    }
+
+    .stat-box:hover {
+      background: rgba(255,255,255,0.22);
+    }
+
+    .stat-num {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #ffffff;
+      display: block;
+    }
+
+    .stat-lbl {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.75);
+      font-weight: 500;
+      letter-spacing: 0.4px;
+    }
+
+    /* ===========================
+       CONTACT SECTION
+    =========================== */
+    .contact-section {
+      background: #f0f4f8;
+      padding: 60px 8%;
+      text-align: center;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 24px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .contact-card {
+      background: #ffffff;
+      border: 1px solid #d0e4f8;
+      border-radius: 14px;
+      padding: 28px 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(21,101,192,0.14);
+    }
+
+    .contact-icon {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .contact-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #1565C0;
+      margin-bottom: 6px;
+    }
+
+    .contact-card p {
+      font-size: 0.83rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    /* ===========================
+       FOOTER
+    =========================== */
+    footer {
+      background-color: #333333;
+      padding: 20px;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    footer p {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.85rem;
+      letter-spacing: 0.3px;
+    }
+
+    footer span {
+      color: #64B5F6;
+    }
+
+    /* ===========================
+       DECORATIVE UTILITIES
+    =========================== */
+    .divider-line {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #1565C0, #2196F3);
+      border-radius: 4px;
+      margin: 12px auto 0;
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 6%;
+      }
+
+      .hero-right {
+        text-align: center;
+        order: -1;
+      }
+
+      .brand-ehealth {
+        margin-left: 0;
+      }
+
+      .hero-left {
+        align-items: center;
+      }
+
+      .about-section {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .about-text .section-label {
+        text-align: center;
+      }
+
+      .about-text p {
+        margin: 0 auto;
+      }
+
+      .stats-grid {
+        width: 100%;
+      }
+
+      .header-top h1 {
+        font-size: 1.3rem;
+      }
+
+      .brand-medicare,
+      .brand-ehealth {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== HEADER / NAV ===================== -->
+  <header id="home">
+    <div class="header-top">
+      <h1>Welcome to <span>MediCare E-Health</span></h1>
+    </div>
+    <nav aria-label="Primary Navigation">
+      <a href="#home" id="nav-home">Home</a>
+      <span class="nav-sep">|</span>
+      <a href="#about" id="nav-about">About</a>
+      <span class="nav-sep">|</span>
+      <a href="#services" id="nav-services">Services</a>
+      <span class="nav-sep">|</span>
+      <a href="#contact" id="nav-contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" aria-label="Hero Section">
+
+    <!-- LEFT: Medical Hex Icons -->
+    <div class="hero-left">
+      <div class="hex-row">
+        <div class="hex-unit">
+          <div class="hex hex-lg" title="Healthcare">⚕</div>
+          <div class="hex-label">Caduceus</div>
+        </div>
+        <div class="hex-unit">
+          <div class="hex" title="Heart Health">♥</div>
+          <div class="hex-label">Cardiology</div>
+        </div>
+      </div>
+      <div class="hex-row" style="margin-left: 30px;">
+        <div class="hex-unit">
+          <div class="hex" title="Medical Cross">✚</div>
+          <div class="hex-label">Emergency</div>
+        </div>
+        <div class="hex-unit">
+          <div class="hex" title="Telemedicine">💊</div>
+          <div class="hex-label">Pharmacy</div>
+        </div>
+      </div>
+      <div class="hex-row">
+        <div class="hex-unit">
+          <div class="hex" title="Diagnostics">🔬</div>
+          <div class="hex-label">Diagnostics</div>
+        </div>
+        <div class="hex-unit">
+          <div class="hex" title="Data & Records">📋</div>
+          <div class="hex-label">Records</div>
+        </div>
+      </div>
+      <!-- ECG Line -->
+      <div class="ecg-line">
+        <svg class="ecg-svg" viewBox="0 0 180 38" aria-hidden="true">
+          <path class="ecg-path"
+            d="M0,20 L20,20 L28,20 L32,5 L36,32 L40,20 L48,20
+               L56,20 L60,8 L64,30 L68,20 L76,20
+               L84,20 L88,6 L92,31 L96,20 L104,20
+               L112,20 L118,12 L122,28 L126,20 L134,20
+               L142,20 L148,9 L152,29 L156,20 L180,20"
+          />
+        </svg>
+      </div>
+    </div>
+
+    <!-- CENTER: Text Content -->
+    <div class="hero-center">
+      <div class="hero-badge">✦ Digital Healthcare Platform ✦</div>
+      <h2 class="hero-title">Your Trusted <em>Digital Healthcare</em> Partner</h2>
+      <p class="hero-subtitle">
+        Providing innovative e-health, telemedicine, and patient care management solutions for a healthier tomorrow.
+      </p>
+      <div class="hero-features">
+        <span class="feature-chip">⚕ Telemedicine</span>
+        <span class="feature-chip">♥ Patient Care</span>
+        <span class="feature-chip">📋 E-Records</span>
+      </div>
+    </div>
+
+    <!-- RIGHT: Brand Text -->
+    <div class="hero-right">
+      <span class="brand-medicare">MediCare</span>
+      <span class="brand-ehealth">E-Health</span>
+      <div class="brand-divider"></div>
+      <span class="brand-tagline">Seamless Digital Wellness</span>
+    </div>
+
+  </section>
+
+  <!-- ===================== SERVICES ===================== -->
+  <section class="services-strip" id="services" aria-labelledby="services-heading">
+    <div class="section-label">What We Offer</div>
+    <h2 class="section-title" id="services-heading">Our Core Services</h2>
+    <div class="divider-line"></div>
+    <br /><br />
+    <div class="cards-grid">
+
+      <article class="service-card" id="card-telemedicine">
+        <span class="card-icon">📱</span>
+        <h3 class="card-title">Telemedicine</h3>
+        <p class="card-desc">Consult certified doctors from home via secure video and chat channels, anytime.</p>
+      </article>
+
+      <article class="service-card" id="card-records">
+        <span class="card-icon">📋</span>
+        <h3 class="card-title">Electronic Health Records</h3>
+        <p class="card-desc">Centralized, secure digital records accessible to authorized healthcare providers.</p>
+      </article>
+
+      <article class="service-card" id="card-monitoring">
+        <span class="card-icon">📊</span>
+        <h3 class="card-title">Remote Monitoring</h3>
+        <p class="card-desc">Real-time tracking of patient vitals and health metrics through connected devices.</p>
+      </article>
+
+      <article class="service-card" id="card-pharmacy">
+        <span class="card-icon">💊</span>
+        <h3 class="card-title">Online Pharmacy</h3>
+        <p class="card-desc">Order prescribed medications with verified e-prescriptions, delivered securely.</p>
+      </article>
+
+      <article class="service-card" id="card-appointments">
+        <span class="card-icon">📅</span>
+        <h3 class="card-title">Appointment Management</h3>
+        <p class="card-desc">Smart scheduling for in-person and virtual visits with automated reminders.</p>
+      </article>
+
+      <article class="service-card" id="card-analytics">
+        <span class="card-icon">🩺</span>
+        <h3 class="card-title">Health Analytics</h3>
+        <p class="card-desc">AI-assisted analytics to identify health trends and support clinical decisions.</p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ===================== ABOUT ===================== -->
+  <section class="about-section" id="about" aria-labelledby="about-heading">
+    <div class="about-text">
+      <div class="section-label">Who We Are</div>
+      <h2 id="about-heading">Redefining Healthcare Through Technology</h2>
+      <p>
+        MediCare E-Health is a pioneering digital health platform dedicated to bridging the gap between patients and quality medical care. Our ecosystem integrates cutting-edge telemedicine, AI-driven diagnostics, and seamless patient management — all within a secure, HIPAA-compliant environment designed for the modern age of healthcare.
+      </p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <span class="stat-num">50K+</span>
+        <span class="stat-lbl">Active Patients</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">1,200+</span>
+        <span class="stat-lbl">Specialist Doctors</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">99.8%</span>
+        <span class="stat-lbl">Uptime Reliability</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">24/7</span>
+        <span class="stat-lbl">Care Support</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACT ===================== -->
+  <section class="contact-section" id="contact" aria-labelledby="contact-heading">
+    <div class="section-label">Get In Touch</div>
+    <h2 class="section-title" id="contact-heading">Contact Us</h2>
+    <div class="divider-line"></div>
+    <br /><br />
+    <div class="contact-grid">
+
+      <div class="contact-card" id="contact-phone">
+        <span class="contact-icon">📞</span>
+        <h3>Phone</h3>
+        <p>+1 (800) MEDICARE<br />Mon–Sat, 8am–8pm</p>
+      </div>
+
+      <div class="contact-card" id="contact-email">
+        <span class="contact-icon">✉</span>
+        <h3>Email</h3>
+        <p>support@medicare-ehealth.com<br />Response within 24h</p>
+      </div>
+
+      <div class="contact-card" id="contact-location">
+        <span class="contact-icon">📍</span>
+        <h3>Location</h3>
+        <p>MediCare Tower, Health District<br />Innovation City, HC 10001</p>
+      </div>
+
+      <div class="contact-card" id="contact-emergency">
+        <span class="contact-icon">🚨</span>
+        <h3>Emergency</h3>
+        <p>24/7 Emergency Helpline<br />+1 (911) CARE-NOW</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer>
+    <p>© 2025 <span>MediCare E-Health (Pvt) Ltd.</span> All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
