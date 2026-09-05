@@ -1,4 +1,4 @@
-Project: Automating the E-health website deployment
+Project: End-to-End Continuous Deployment Pipeline on AWS
 
 Architecture Diagram:
 
